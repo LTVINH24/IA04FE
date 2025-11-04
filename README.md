@@ -6,6 +6,7 @@ A complete user registration and authentication system built with React, featuri
 
 - **User Registration**: Complete sign-up form with comprehensive validation
 - **User Login**: Secure login interface with form validation
+- **Dashboard**: Display user information
 - **Password Validation**: Real-time validation with requirements:
   - Minimum 6 characters
   - At least one lowercase letter
@@ -36,7 +37,7 @@ A complete user registration and authentication system built with React, featuri
 
 1. [Install NodeJS](https://nodejs.org/en/download/current)
 
-2. **Open folder:** ia03fe with VSCode
+2. **Open folder:** FE with VSCode
 3. **Install dependencies**:
    ```bash
    npm install
@@ -54,15 +55,6 @@ A complete user registration and authentication system built with React, featuri
    http://localhost:5173
    ```
 
-## 🌐 Backend API Configuration
-
-The application is configured to connect to a backend API at:
-- **Base URL**: `http://localhost:8080`
-- **Register Endpoint**: `POST /user/register`
-- **Login Endpoint**: `POST /user/login`
-
-
-
 ## 📦 Available Scripts
 
 ```bash
@@ -72,12 +64,7 @@ npm run dev
 # Build for production
 npm run build
 
-# Preview production build
-npm run preview
-
-# Run ESLint
-npm run lint
 ```
-## Web Url: `https://ia-03-fe-eight.vercel.app`
+## Web Url: `https://ia-04-fe.vercel.app`
 ## Note
-Since the website is deployed on a free hosting service, it may take 15–20 seconds for the host to start up. Please be patient.
+Since the website is deployed on a free hosting service, it may take 1–2 minutes for the host to start up. Please be patient.

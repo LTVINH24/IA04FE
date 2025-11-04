@@ -9,12 +9,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { UserPlus, Eye, EyeOff, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { authService } from '@/services/authService';
 import { toast } from 'sonner';
-
+import { useAuth } from '@/context/AuthContext';
+import { Navigate } from 'react-router-dom';
 function SignUp() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { isAuthenticated } = useAuth();
 
+ 
   const {
     register,
     handleSubmit,
@@ -56,7 +59,9 @@ function SignUp() {
   };
 
   const allPasswordRulesValid = Object.values(passwordValidation).every(Boolean);
-
+   if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
