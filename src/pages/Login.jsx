@@ -10,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoggingIn, isAuthenticated } = useAuth();
+  const { login, isLoggingIn } = useAuth();
 
   const {
     register,
@@ -19,11 +19,6 @@ function Login() {
   } = useForm({
     mode: 'onBlur',
   });
-
-  // Redirect to dashboard if already authenticated
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
-  }
 
   const onSubmit = (data) => {
     login(data);

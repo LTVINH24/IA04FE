@@ -9,8 +9,10 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // Khởi tạo isAuthenticated dựa trên refresh token có sẵn
+  const [isAuthenticated, setIsAuthenticated] = useState(tokenManager.hasRefreshToken());
+  // Set loading true ban đầu nếu có refresh token để tránh flash
+  const [isLoading, setIsLoading] = useState(tokenManager.hasRefreshToken());
   const navigate = useNavigate();
   const initRef = useRef(false);
 
@@ -24,23 +26,25 @@ export const AuthProvider = ({ children }) => {
       const refreshToken = tokenManager.getRefreshToken();
       
       if (refreshToken) {
+        setIsAuthenticated(true); // Set ngay lập tức
         try {
-          // Try to refresh the access token
+          // Refresh token im lặng ở background
           const response = await authService.refresh();
           const { accessToken, refreshToken: newRefreshToken } = response.result;
           
           tokenManager.setTokens(accessToken, newRefreshToken);
-          setIsAuthenticated(true);
           // Don't fetch user info here - let Dashboard do it
         } catch (error) {
           console.error('Failed to restore session:', error);
           tokenManager.clearTokens();
           setIsAuthenticated(false);
           setUser(null);
+        } finally {
+          setIsLoading(false);
         }
+      } else {
+        setIsLoading(false);
       }
-      
-      setIsLoading(false);
     };
 
     initAuth();
